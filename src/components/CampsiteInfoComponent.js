@@ -23,8 +23,6 @@ function RenderCampsite({campsite}) {
     );
 }
 
-
-
 function RenderComments({comments}) {
     if (comments) {
         return (
@@ -37,8 +35,7 @@ function RenderComments({comments}) {
                                 <p>
                                     {comment.text}
                                     <br/>
-                                    -- {comment.author}, 
-                                    {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
+                                    -- {comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
                                 </p>
                             </div>
                         );
@@ -81,7 +78,7 @@ class CommentForm extends Component {
         return (
             <div>
                 <Button onClick={this.toggleModal} outline >
-                    <i className="fa fa-pencil fa-lg"> Submit Comments </i>
+                    <i className="fa fa-pencil fa-lg" /> Submit Comments
                 </Button>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal} > Submit Comment </ModalHeader>
@@ -89,7 +86,12 @@ class CommentForm extends Component {
                         <LocalForm onSubmit={values => this.handleSubmit(values)}>
                             <div className="form-group">
                                 <Label htmlFor="rating"> Rating </Label>
-                                <Control.select className="form-control" model=".rating" id="rating" name="rating">
+                                <Control.select
+                                    className="form-control"
+                                    model=".rating"
+                                    id="rating"
+                                    name="rating"
+                                >
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -99,27 +101,39 @@ class CommentForm extends Component {
                             </div>
                             <div className="form-group">
                                 <Label htmlFor="author"> Your Name </Label>
-                                <Control.text className="form-control" model=".author" id="author" name="author" placeholder="Your Name" 
+                                <Control.text
+                                    className="form-control"
+                                    model=".author"
+                                    id="author"
+                                    name="author"
+                                    placeholder="Your Name" 
                                     validators={{
-                                                minLength: minLength(2), 
-                                                maxLength: maxLength(15)
-                                            }}
+                                            minLength: minLength(2), 
+                                            maxLength: maxLength(15)
+                                    }}
 
-                                    />
-                                    <Errors
-                                        className="text-danger"
-                                        model=".author"
-                                        show="touched"
-                                        component="div"
-                                        messages={{
-                                            minLength: 'Must be at least 2 characters',
-                                            maxLength: 'Must be 15 characters or less'
-                                        }}
-                                    />
+                                />
+                                <Errors
+                                    className="text-danger"
+                                    model=".author"
+                                    show="touched"
+                                    component="div"
+                                    messages={{
+                                        minLength: 'Must be at least 2 characters',
+                                        maxLength: 'Must be 15 characters or less'
+                                    }}
+                                />
                             </div>
                             <div className="form-group">
                                 <Label htmlFor="text"> Comment </Label>
-                                <Control.textarea className="form-control" rows="6" model=".text" id="text" name="text" placeholder="Comments Here" />
+                                <Control.textarea
+                                    className="form-control"
+                                    rows="6"
+                                    model=".text"
+                                    id="text"
+                                    name="text"
+                                    placeholder="Comments Here"
+                                />
                             </div>
                             <Button color="primary" type="submit"> Submit </Button> 
                         </LocalForm>
